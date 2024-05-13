@@ -1,10 +1,18 @@
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const SideBar = () => {
+export default function SideBar() {
+
+  const navigate = useNavigate()
+
+  const logOut = () => {
+    localStorage.removeItem('token')
+    navigate('/login')
+  }
+
   return (
-    <>
-      SideBar
-    </>
+    <div>
+      <button className='btn btn-danger' onClick={logOut}>log out</button>
+    </div>
   )
 }
-
-export default SideBar
