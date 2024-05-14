@@ -1,0 +1,56 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --yellow:rgba(239, 155, 40, 1);
+    --white:white;
+}
+.auth-container{
+    background-image: url(assets/bg1.png);
+    background-size: cover;
+    background-position: center;
+}
+.form-contentChangpass{
+    background-color: rgba(49, 89, 81, 0.9);
+}
+.textChangepass{
+    color: var(--yellow);
+    position: relative;
+}
+
+
+.textChangepass::after{
+    content: " ";
+    width: 10px;
+    height: 3px;
+    left: 0px;
+    bottom: -2px;
+    background-color:var(--yellow);
+    position: absolute;
+    
+    
+
+}
+
+.form-controlChangepass,.input-group-text.Changepass{
+
+    border-left: transparent !important;
+        border-top: transparent !important;
+        background-color: transparent !important;
+        border-right: transparent!important;
+        color: white !important;
+}
+::placeholder{
+    color: white !important; 
+}
+
+.changepassLable {
+    color: var(--yellow);
+}
+.btnChangepass{
+   
+    background-color: var(--yellow) !important;
+}

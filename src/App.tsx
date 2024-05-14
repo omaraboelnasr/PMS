@@ -7,12 +7,15 @@ import ForgetPass from "./modules/AuthenticationModule/components/ForgetPass/For
 import ResetPass from "./modules/AuthenticationModule/components/ResetPass/ResetPass";
 import Register from "./modules/AuthenticationModule/components/Register/Register";
 import VerifyAccount from "./modules/AuthenticationModule/components/Verify Account/VerifyAccount";
-import ChangePass from "./modules/AuthenticationModule/components/ChangePass/ChangePass";
+
 import MasterLayout from "./modules/SharedModule/components/MasterLayout/MasterLayout";
 import Dashboard from "./modules/DashboardModule/components/Dashboard/Dashboard";
 import ProjectsList from "./modules/ProjectsModule/components/ProjectsList/ProjectsList";
 import TaskesList from "./modules/TasksModule/components/TaskesList/TaskesList";
 import UsersList from "./modules/UsersModule/components/UsersList/UsersList";
+import ChangePass from "./modules/AuthenticationModule/components/ChangePass/ChangePass";
+import { ToastContainer ,toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   const routers = createBrowserRouter([
     {
@@ -43,7 +46,8 @@ function App() {
   ]);
   return (
     <>
-      <RouterProvider router={routers} />
+    <ToastContainer />
+    <RouterProvider router= { routers } /> 
     </>
   );
 }
