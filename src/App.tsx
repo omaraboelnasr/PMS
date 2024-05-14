@@ -7,12 +7,13 @@ import ForgetPass from "./modules/AuthenticationModule/components/ForgetPass/For
 import ResetPass from "./modules/AuthenticationModule/components/ResetPass/ResetPass";
 import Register from "./modules/AuthenticationModule/components/Register/Register";
 import VerifyAccount from "./modules/AuthenticationModule/components/Verify Account/VerifyAccount";
-import ChangePass from "./modules/AuthenticationModule/components/ChangePass/ChangePass";
+
 import MasterLayout from "./modules/SharedModule/components/MasterLayout/MasterLayout";
 import Dashboard from "./modules/DashboardModule/components/Dashboard/Dashboard";
 import ProjectsList from "./modules/ProjectsModule/components/ProjectsList/ProjectsList";
 import TaskesList from "./modules/TasksModule/components/TaskesList/TaskesList";
 import UsersList from "./modules/UsersModule/components/UsersList/UsersList";
+import ChangePasstest from "./modules/AuthenticationModule/components/ChangePass/ChangePasstest";
 function App() {
   const routers = createBrowserRouter([
     {
@@ -25,7 +26,7 @@ function App() {
         { path: "register", element: <Register /> },
         { path: "forget-pass", element: <ForgetPass /> },
         { path: "reset-pass", element: <ResetPass /> },
-        { path: "change-pass", element: <ChangePass /> },
+        { path: "change-pass", element: <ChangePasstest /> },
         { path: "verify-account", element: <VerifyAccount /> },
       ],
     },
@@ -43,7 +44,7 @@ function App() {
   ]);
   return (
     <>
-      <RouterProvider router={routers} />
+    <RouterProvider router= { routers } />
     </>
   );
 }

@@ -1,23 +1,24 @@
 import { createContext, useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from "../../node_modules/jwt-decode";
 
 export let AuthContext=createContext(null);
 
 export default function AuthContextProvider(props:any){
-  const loginInfoFromLocal=localStorage.getItem("token");
+  
   const baseUrl="https://upskilling-egypt.com:3003/api/v1/";
-  const requestHeader={Authorization: `Bearer ${loginInfoFromLocal}`} ;
+  const requestHeader={Authorization: `Bearer ${localStorage.getItem("token")}`} ;
 
   const [loginInfo,setLoginInfo]=useState();
 
   let getloginInfo=()=>{
-      const decodeToken=jwtDecode(loginInfoFromLocal);
+    let tokenInfo=localStorage.getItem("token");
+      const decodeToken=jwtDecode(tokenInfo);
       setLoginInfo(decodeToken);
 
   }
 
   useEffect(()=>{
-    if(loginInfoFromLocal){
+    if(localStorage.getItem("token")){
 
       getloginInfo();
     }
