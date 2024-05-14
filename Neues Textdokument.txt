@@ -1,0 +1,5 @@
+{isCollapsed === true ? (
+                <i className="py-3 fa-solid fa-chevron-right chevron-right"></i>
+              ) : (
+                <i className="py-3 fa-solid fa-chevron-left chevron-left"></i>
+              )}
