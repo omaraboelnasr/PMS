@@ -13,7 +13,9 @@ import Dashboard from "./modules/DashboardModule/components/Dashboard/Dashboard"
 import ProjectsList from "./modules/ProjectsModule/components/ProjectsList/ProjectsList";
 import TaskesList from "./modules/TasksModule/components/TaskesList/TaskesList";
 import UsersList from "./modules/UsersModule/components/UsersList/UsersList";
-import ChangePasstest from "./modules/AuthenticationModule/components/ChangePass/ChangePasstest";
+import ChangePass from "./modules/AuthenticationModule/components/ChangePass/ChangePass";
+import { ToastContainer ,toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   const routers = createBrowserRouter([
     {
@@ -26,7 +28,7 @@ function App() {
         { path: "register", element: <Register /> },
         { path: "forget-pass", element: <ForgetPass /> },
         { path: "reset-pass", element: <ResetPass /> },
-        { path: "change-pass", element: <ChangePasstest /> },
+        { path: "change-pass", element: <ChangePass /> },
         { path: "verify-account", element: <VerifyAccount /> },
       ],
     },
@@ -44,7 +46,8 @@ function App() {
   ]);
   return (
     <>
-    <RouterProvider router= { routers } />
+    <ToastContainer />
+    <RouterProvider router= { routers } /> 
     </>
   );
 }
