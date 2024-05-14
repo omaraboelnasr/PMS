@@ -1,14 +1,15 @@
-import { ToasterContext } from './../../../../Context/ToastContext';
+import { ToastContext } from './../../../../Context/ToastContext';
 import { AuthContext } from './../../../../Context/AuthContext';
 import React, { useContext } from "react";
 import logo from "../../../../assets/PMS 3.png";
-import { useForm  } from "react-hook-form";
+import { useForm,useNavigate  } from "react-hook-form";
 
 import axios from 'axios';
 function ChangePass() {
-  //const navigate=useNavigate();
+  const navigate=useNavigate();
 
   const {loginInfo ,baseUrl,requestHeader}= useContext(AuthContext);
+  const {getToasterValue}= useContext(ToastContext);
  
   const {
     register,
