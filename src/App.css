@@ -1,0 +1,42 @@
+.register-container {
+    background-image: url(assets/bg1.png);
+    background-size: 100% 100%;
+}
+
+.register-form {
+    background-color: rgba(49, 89, 81, 0.9);
+}
+
+.register-text-color {
+    color: rgba(239, 155, 40, 1);
+}
+
+.input-style {
+    background-color: #fff0;
+    border: none;
+    border-bottom: #9c9c9c 1px solid;
+    width: 100%;
+    height: 35px;
+    color: white;
+}
+
+.input-style::placeholder {
+    color: white;
+}
+
+.input-style:focus {
+    color: white;
+    border: none;
+}
+
+.underLine {
+    border-bottom: 3px solid rgba(239, 155, 40, 1);
+}
+
+.profileImg{
+    background-image: url(assets/Profile.png);
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}

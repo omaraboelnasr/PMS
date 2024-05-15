@@ -13,6 +13,9 @@ import Dashboard from "./modules/DashboardModule/components/Dashboard/Dashboard"
 import ProjectsList from "./modules/ProjectsModule/components/ProjectsList/ProjectsList";
 import TaskesList from "./modules/TasksModule/components/TaskesList/TaskesList";
 import UsersList from "./modules/UsersModule/components/UsersList/UsersList";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const routers = createBrowserRouter([
     {
@@ -44,6 +47,7 @@ function App() {
   return (
     <>
       <RouterProvider router={routers} />
+      <ToastContainer />
     </>
   );
 }
