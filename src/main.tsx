@@ -6,11 +6,14 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./index.css";
 import AuthContextProvider from "./modules/SharedModule/components/AuthContext/AuthContext.tsx";
+import ApiContextProvider from "./modules/SharedModule/components/ApiContext/ApiContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AuthContextProvider>
-<App />
+      <ApiContextProvider>
+        <App />
+      </ApiContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );
