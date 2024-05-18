@@ -1,4 +1,4 @@
-import "./App.css";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthLayout from "./modules/SharedModule/components/AuthLayout/AuthLayout";
 import NotFound from "./modules/SharedModule/components/NotFound/NotFound";
@@ -13,7 +13,17 @@ import Dashboard from "./modules/DashboardModule/components/Dashboard/Dashboard"
 import ProjectsList from "./modules/ProjectsModule/components/ProjectsList/ProjectsList";
 import TaskesList from "./modules/TasksModule/components/TaskesList/TaskesList";
 import UsersList from "./modules/UsersModule/components/UsersList/UsersList";
+import { ToastContainer } from "react-toastify";
+import "./App.css";
+
+import { useContext } from "react";
+import { AuthContext } from "./modules/SharedModule/components/AuthContext/AuthContext";
+import ProtectedRoute from "./modules/SharedModule/components/ProtectedRoute/ProtectedRoute";
+
 function App() {
+
+  const {loginData} = useContext(AuthContext) 
+
   const routers = createBrowserRouter([
     {
       path: "/",
@@ -31,7 +41,7 @@ function App() {
     },
     {
       path: "dashboard",
-      element: <MasterLayout />,
+      element: <ProtectedRoute logindata={loginData} ><MasterLayout /></ProtectedRoute>  ,
       errorElement: <NotFound />,
       children: [
         { index: true, element: <Dashboard /> },
@@ -43,6 +53,7 @@ function App() {
   ]);
   return (
     <>
+      <ToastContainer />
       <RouterProvider router={routers} />
     </>
   );
