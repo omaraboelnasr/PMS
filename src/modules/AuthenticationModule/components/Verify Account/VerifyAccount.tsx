@@ -1,37 +1,38 @@
-
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import logo from "../../../../assets/PMS 3.png";
-import { APIcontext } from "../../../../Context/baseUrl";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContext } from "../../../../Context/ToastContext";
+import { BASE_URL } from "../../../../lib/APIs";
 
 const VerifyAccount = () => {
-  const {baseUrl}=useContext(APIcontext)
-  const {getToastValue}=useContext(ToastContext)
+    const { getToastValue } = useContext(ToastContext);
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const [disableSubmitBtn, setDisableSubmitBtn] = useState(false);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
-  const {
-      register,
-      handleSubmit,
-      formState: { errors },
-  } = useForm();
-  const onSubmit = async (data) => {
-    try {
-        let response = await axios.put(
-            `${baseUrl}/Users/verify`,data
-        );
-        getToastValue('success','Verification success you can login now')
-        navigate("/login");
-    } catch (error) {
-      getToastValue('error',error.response.data.message)
-    }
-};
-  return (
-    <>
-    <div className="register-container">
+    const onSubmit = async (data) => {
+        setDisableSubmitBtn(true)
+        try {
+            let response = await axios.put(`${BASE_URL}/Users/verify`, data);
+            getToastValue("success",response.data.message?response.data.message:"Verification success you can login now");
+            navigate("/login");
+        } catch (error) {
+            getToastValue("error", error.response.data.message);
+        }finally {
+            setDisableSubmitBtn(false); 
+        }
+    };
+
+    return (
+        <>
+            <div className="register-container">
                 <div className="container-fluid vh-100">
                     <div className="row vh-100 justify-content-center align-items-center">
                         <div className="col-md-6">
@@ -70,7 +71,9 @@ const VerifyAccount = () => {
                                             )}
 
                                             <div className="input-group pb-3">
-                                                <p className="my-1 register-text-color">OTP Verfication</p>
+                                                <p className="my-1 register-text-color">
+                                                    OTP Verfication
+                                                </p>
                                                 <input
                                                     type="text"
                                                     className="input-style"
@@ -80,7 +83,7 @@ const VerifyAccount = () => {
                                                     })}
                                                 />
                                             </div>
-                                            {errors.phoneNumber && (
+                                            {errors.code && (
                                                 <p className="alert alert-danger">
                                                     {errors.code.message}
                                                 </p>
@@ -88,7 +91,10 @@ const VerifyAccount = () => {
                                         </div>
                                     </div>
                                     <div className="d-flex justify-content-center">
-                                        <button className="btn btn-warning text-light px-5 py-2 mt-4 fs-5">
+                                        <button
+                                            className="btn btn-warning text-light px-5 py-2 mt-4 fs-5"
+                                            disabled={disableSubmitBtn}
+                                        >
                                             Save
                                         </button>
                                     </div>
@@ -98,8 +104,8 @@ const VerifyAccount = () => {
                     </div>
                 </div>
             </div>
-    </>
-  )
-}
+        </>
+    );
+};
 
-export default VerifyAccount
+export default VerifyAccount;

@@ -5,11 +5,11 @@ import profileImgC from "../../../../assets/Group 48102075.png";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { APIcontext } from "../../../../Context/baseUrl";
 import { ToastContext } from "../../../../Context/ToastContext";
+import { countryValidation, emailValidation, passwordValidation, phoneNumberValidation, userNameValidation } from "../../../../lib/inputValidate";
+import { BASE_URL } from "../../../../lib/APIs";
 
 const Register = () => {
-    const {baseUrl}=useContext(APIcontext)
     const {getToastValue}=useContext(ToastContext)
 
     const {
@@ -18,8 +18,8 @@ const Register = () => {
         watch,
         formState: { errors },
     } = useForm();
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setshowConfirmPassword] = useState(false);
+    const [isPasswordShown, setIsPasswordShown] = useState(false);
+    const [isConfirmPasswordShown, setisConfirmPasswordShown] = useState(false);
     const navigate = useNavigate();
 
     const appendToFormData = (data) => {
@@ -38,7 +38,7 @@ const Register = () => {
         const dataFormData: FormData = appendToFormData(data);
         try {
             let response = await axios.post(
-                `${baseUrl}/Users/Register`,
+                `${BASE_URL}/Users/Register`,
                 dataFormData
             );
             getToastValue('success','You Register success go to your email to get verification code')
@@ -47,13 +47,12 @@ const Register = () => {
             getToastValue('error',error.response.data.message)
         }
     };
-    const handleShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
 
-    const handleShowConfirmPassword = () => {
-        setshowConfirmPassword(!showConfirmPassword);
-    };
+    const handlePasswordVisibility = (e,setterFn)=>{
+        e.preventDefault();
+        setterFn(prev=>!prev);
+    }
+
     return (
         <>
             <div className="register-container">
@@ -99,19 +98,7 @@ const Register = () => {
                                                     type="text"
                                                     className="input-style"
                                                     placeholder="Enter Your User Name"
-                                                    {...register("userName", {
-                                                        required: "User Name is required",
-                                                        maxLength: {
-                                                            value: 8,
-                                                            message:
-                                                                "The userName must be less than 8 Characters.",
-                                                        },
-                                                        pattern: {
-                                                            value: /^[a-zA-Z]+\d+$/g,
-                                                            message:
-                                                                "The userName must contain characters and end with numbers without spaces.",
-                                                        },
-                                                    })}
+                                                    {...register("userName", userNameValidation)}
                                                 />
                                             </div>
                                             {errors.userName && (
@@ -126,9 +113,7 @@ const Register = () => {
                                                     type="text"
                                                     className="input-style"
                                                     placeholder="Enter Your Country"
-                                                    {...register("country", {
-                                                        required: "Country is required",
-                                                    })}
+                                                    {...register("country",countryValidation)}
                                                 />
                                             </div>
                                             {errors.country && (
@@ -140,27 +125,19 @@ const Register = () => {
                                             <div className="input-group mb-3 position-relative">
                                                 <p className="my-1 register-text-color">Password</p>
                                                 <input
-                                                    type={showPassword ? "text" : "password"}
+                                                    type={isPasswordShown ? "text" : "password"}
                                                     className="input-style"
                                                     placeholder="Enter Your Password"
-                                                    {...register("password", {
-                                                        required: "Password is required",
-                                                        pattern: {
-                                                            value:
-                                                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:"<>?]).{6,}$/g,
-                                                            message:
-                                                                "The password must include at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 6 characters long.",
-                                                        },
-                                                    })}
+                                                    {...register("password", passwordValidation)}
                                                 />
                                                 <div className="position-absolute end-0 px-2 py-4 mt-3">
-                                                    <span onClick={handleShowPassword}>
-                                                        {showPassword ? (
+                                                    <button onClick={(e)=>handlePasswordVisibility(e,setIsPasswordShown)} className="showPassBtn">
+                                                        {isPasswordShown ? (
                                                             <i className="fa-regular fa-eye"></i>
                                                         ) : (
                                                             <i className="fa-regular fa-eye-slash"></i>
                                                         )}
-                                                    </span>
+                                                    </button>
                                                 </div>
                                             </div>
                                             {errors.password && (
@@ -176,13 +153,7 @@ const Register = () => {
                                                     type="text"
                                                     className="input-style"
                                                     placeholder="Enter your E-mail"
-                                                    {...register("email", {
-                                                        required: "Email is required",
-                                                        pattern: {
-                                                            value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
-                                                            message: "Invalid mail",
-                                                        },
-                                                    })}
+                                                    {...register("email",emailValidation)}
                                                 />
                                             </div>
                                             {errors.email && (
@@ -197,13 +168,7 @@ const Register = () => {
                                                     type="text"
                                                     className="input-style"
                                                     placeholder="Enter Your Phone Number"
-                                                    {...register("phoneNumber", {
-                                                        required: "Phone Number is required",
-                                                        pattern: {
-                                                            value: /^\d{11}$/g,
-                                                            message: "Invalid Phone Number",
-                                                        },
-                                                    })}
+                                                    {...register("phoneNumber", phoneNumberValidation)}
                                                 />
                                             </div>
                                             {errors.phoneNumber && (
@@ -217,7 +182,7 @@ const Register = () => {
                                                     Confirm Password
                                                 </p>
                                                 <input
-                                                    type={showConfirmPassword ? "text" : "password"}
+                                                    type={isConfirmPasswordShown ? "text" : "password"}
                                                     className="input-style"
                                                     placeholder="Confirm Your Password"
                                                     {...register("confirmPassword", {
@@ -228,8 +193,8 @@ const Register = () => {
                                                     })}
                                                 />
                                                 <div className="position-absolute end-0 px-2 py-4 mt-3">
-                                                    <span onClick={handleShowConfirmPassword}>
-                                                        {showConfirmPassword ? (
+                                                    <span onClick={(e)=>handlePasswordVisibility(e,setisConfirmPasswordShown)}>
+                                                        {isConfirmPasswordShown ? (
                                                             <i className="fa-regular fa-eye"></i>
                                                         ) : (
                                                             <i className="fa-regular fa-eye-slash"></i>

@@ -1,3 +1,9 @@
+.light{
+    --bg-primary:#111;
+    --bg-secondary:#222;
+    --text-primary:#333;
+    }
+
 .register-container {
     background-image: url(assets/bg1.png);
     background-size: 100% 100%;
@@ -39,4 +45,8 @@
 
 .cursor-pointer{
     cursor: pointer;
+}
+
+.showPassBtn{
+    border: none;
 }
