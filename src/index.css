@@ -1,0 +1,77 @@
+a {
+    text-decoration: none;
+    color: black;
+  }
+  
+.auth-container {
+    background-image: url(../src/assets/bg1.png);
+    background-size: cover;
+    background-position: bottom center;
+    min-height: 100vh !important;
+  }
+  
+.auth-container ::placeholder{
+      color: rgb(202, 202, 202) !important;
+  }
+  
+  .form {
+    background: #29534eb2 !important;
+  }
+  
+  /* ?====================form Logo ======================= */
+  
+  @media screen and (max-width: 400px) {
+    .form-logo {
+      width: 205px !important;
+    }
+  }
+  
+  @media screen and (min-width: 800px) {
+    .form-logo {
+      width: 100% !important;
+    }
+  }
+  
+  /* !=================== __ UnderLine Form-Name===================== */
+  .form-Name,label {
+  
+    color: #f09a22 !important;
+  }
+  
+  .form-Name span {
+    position: relative;
+    width: fit-content;
+    overflow: hidden;
+  }
+  
+  .form-Name span::after {
+    content: " " !important;
+    width: 14px !important;
+    height: 3px !important;
+    background-color: var(--main-color) !important;
+    position: absolute !important;
+    left: 1.9px !important;
+    bottom: 0 !important;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .form-Name span::after {
+      content: " " !important;
+      width: 10px !important;
+      max-width: 12px !important;
+      height: 2px !important;
+      background-color: var(--main-color) !important;
+      position: absolute !important;
+      left: 1.9px !important;
+      bottom: 0 !important;
+    }
+  }
+.warningg{
+    background-color:#EF9B28 !important;
+}
+  /* ================inputs===================== */
+.auth-container {
+    ::placeholder {
+      color: rgba(255, 255, 255, 0.712);
+    }
+}
