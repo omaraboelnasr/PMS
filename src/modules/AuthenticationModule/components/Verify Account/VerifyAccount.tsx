@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import logo from "../../../../assets/PMS 3.png";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContext } from "../../../../Context/ToastContext";
-import { BASE_URL } from "../../../../lib/APIs";
+import { userVerifyAccount } from "../../../../services/user";
 
 const VerifyAccount = () => {
     const { getToastValue } = useContext(ToastContext);
@@ -14,22 +13,26 @@ const VerifyAccount = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors,isSubmitting },
     } = useForm();
-
+    
     const onSubmit = async (data) => {
-        setDisableSubmitBtn(true)
         try {
-            let response = await axios.put(`${BASE_URL}/Users/verify`, data);
+            const response = await userVerifyAccount(data)
             getToastValue("success",response.data.message?response.data.message:"Verification success you can login now");
             navigate("/login");
         } catch (error) {
             getToastValue("error", error.response.data.message);
-        }finally {
-            setDisableSubmitBtn(false); 
         }
     };
 
+    useEffect(()=>{
+        if(isSubmitting){
+            setDisableSubmitBtn(true)
+        }else{
+            setDisableSubmitBtn(false)
+        }
+    },[isSubmitting])
     return (
         <>
             <div className="register-container">

@@ -4,10 +4,10 @@ import profileImgC from "../../../../assets/Group 48102075.png";
 
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { ToastContext } from "../../../../Context/ToastContext";
 import { countryValidation, emailValidation, passwordValidation, phoneNumberValidation, userNameValidation } from "../../../../lib/inputValidate";
-import { BASE_URL } from "../../../../lib/APIs";
+import { userRegister } from "../../../../services/user";
+import axiosInstance from "../../../../axios";
 
 const Register = () => {
     const {getToastValue}=useContext(ToastContext)
@@ -37,13 +37,11 @@ const Register = () => {
     const onSubmit = async (data) => {
         const dataFormData: FormData = appendToFormData(data);
         try {
-            let response = await axios.post(
-                `${BASE_URL}/Users/Register`,
-                dataFormData
-            );
-            getToastValue('success','You Register success go to your email to get verification code')
-            navigate("/verify-account");
+            const response = await userRegister(dataFormData)
+                getToastValue('success',response.data.message)
+                navigate("/verify-account");
         } catch (error) {
+            console.log(error);
             getToastValue('error',error.response.data.message)
         }
     };
@@ -193,13 +191,13 @@ const Register = () => {
                                                     })}
                                                 />
                                                 <div className="position-absolute end-0 px-2 py-4 mt-3">
-                                                    <span onClick={(e)=>handlePasswordVisibility(e,setisConfirmPasswordShown)}>
+                                                    <button onClick={(e)=>handlePasswordVisibility(e,setisConfirmPasswordShown)} className="showPassBtn">
                                                         {isConfirmPasswordShown ? (
                                                             <i className="fa-regular fa-eye"></i>
                                                         ) : (
                                                             <i className="fa-regular fa-eye-slash"></i>
                                                         )}
-                                                    </span>
+                                                    </button>
                                                 </div>
                                             </div>
                                             {errors.confirmPassword && (

@@ -49,4 +49,6 @@
 
 .showPassBtn{
     border: none;
+    background-color: transparent;
+    color: #111;
 }
