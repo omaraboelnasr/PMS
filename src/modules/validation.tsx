@@ -1,9 +1,4 @@
-// export const validateEmail = (value) => {
-//   if (!value) return "Email is required";
-//   const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-//   if (!emailPattern.test(value)) return "Invalid email format";
-//   return true;
-// };
+
 
 export const validateEmail = {
   required: "Email is required",
@@ -13,11 +8,6 @@ export const validateEmail = {
     message: "Email is invalid",
   },
 }
-
-// export const validatePassword = (value) => {
-//   if (!value) return "Password is required";
-//   return true;
-// };
 
 export const validatePassword = {
   required: "Password is required",
@@ -81,3 +71,5 @@ export const OTPValidation = {
     message: "OTP must be exactly 4 characters long",
   },
 };
+
+

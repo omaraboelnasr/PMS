@@ -19,6 +19,7 @@ import "./App.css";
 import { useContext } from "react";
 import { AuthContext } from "./modules/SharedModule/components/AuthContext/AuthContext";
 import ProtectedRoute from "./modules/SharedModule/components/ProtectedRoute/ProtectedRoute";
+import ProjectsData from "./modules/ProjectsModule/components/ProjectsData/ProjectsData";
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
       children: [
         { index: true, element: <Dashboard /> },
         { path: "projects", element: <ProjectsList /> },
+        { path: "projects-data", element: <ProjectsData /> },
         { path: "tasks", element: <TaskesList /> },
         { path: "users", element: <UsersList /> },
       ],

@@ -1,10 +1,11 @@
 
-const NavBar = () => {
+import React from 'react'
+
+export default function NavBar() {
   return (
-    <>
-      NavBar
-    </>
+    <div>
+      
+    </div>
   )
 }
 
-export default NavBar

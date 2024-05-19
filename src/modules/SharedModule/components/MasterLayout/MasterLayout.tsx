@@ -6,11 +6,11 @@ const MasterLayout = () => {
   return (
     <>
       <NavBar />
-      <div className="d-flex">
-        <div className="w-25">
+      <div className="w-100 d-flex justify-content-between">
+        <div style={{ width: '15%' }}>
           <SideBar />
         </div>
-        <div className="w-75">
+        <div  style={{width:'85%' }}>
           <Outlet />
         </div>
       </div>

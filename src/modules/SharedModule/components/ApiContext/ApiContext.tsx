@@ -5,10 +5,12 @@ import { createContext } from 'react'
 
      export default function ApiContextProvider (props:any) {
 
-         let baseUrl  = 'https://upskilling-egypt.com:3003/api/v1'
+         let baseUrl = 'https://upskilling-egypt.com:3003/api/v1'
+         
+         let authorization = `Bearer ${localStorage.getItem('token')}`
 
          return (
-             <ApiContext.Provider value={{ baseUrl }}>
+             <ApiContext.Provider value={{ baseUrl , authorization }}>
                  {props.children}
              </ApiContext.Provider>
       ) 

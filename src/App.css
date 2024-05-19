@@ -1,6 +1,12 @@
 
 @import 'react-toastify/dist/ReactToastify.css';
 
+body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .login-bg{
 background-image: url(../src/assets/bg3.png);
 background-size: cover;
@@ -14,6 +20,7 @@ background-position: center;
 :root {
     --main-color:rgba(239, 155, 40, 1);
     --main-bg-color: rgba(49, 89, 81, 0.9);
+    --second-bg-color :  rgba(211, 211, 211, 0.192);
 }
 
 .input-group input{
@@ -35,4 +42,24 @@ background-position: center;
 .form-button {
     background-color: var(--main-color);
     border: 1px solid var(--main-color) ;
+}
+
+.projects-container a {
+    background-color: var(--main-color);
+    color :white;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.projectsdata-container a{
+text-decoration: none;
+}
+
+.projectsData{
+background-color: var(--second-bg-color);
+}
+
+.projects-crud{
+    background-color: aqua;
 }
