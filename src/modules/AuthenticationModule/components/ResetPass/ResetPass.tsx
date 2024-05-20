@@ -28,7 +28,11 @@ export default function ResetPass() {
       toast.success('Reset Password Successfully');
       navigate('/login');
     } catch (error) {
-      toast.error(error?.response?.data?.message || 'An error occurred'); // Handling error and displaying error message
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message || 'An error occurred');
+      } else {
+        toast.error('An unexpected error occurred');
+      }
     }
   };
 

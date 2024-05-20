@@ -11,17 +11,25 @@ import ChangePass from "./modules/AuthenticationModule/components/ChangePass/Cha
 import MasterLayout from "./modules/SharedModule/components/MasterLayout/MasterLayout";
 import Dashboard from "./modules/DashboardModule/components/Dashboard/Dashboard";
 import ProjectsList from "./modules/ProjectsModule/components/ProjectsList/ProjectsList";
-import TaskesList from "./modules/TasksModule/components/TaskesList/TaskesList";
+import TasksList from "./modules/TasksModule/components/TasksList/TasksList";
 import UsersList from "./modules/UsersModule/components/UsersList/UsersList";
+import TasksData from "./modules/TasksModule/components/TasksData/TasksData";
+import ProtectedRoute from "./modules/SharedModule/components/ProtectedRoute/ProtectedRoute";
+import { useContext } from "react";
+import { AuthContext } from "./Context/AuthContext";
+
+
 function App() {
+  const {loginData,saveLoginData}=useContext(AuthContext)
+ 
   const routers = createBrowserRouter([
     {
       path: "/",
       element: <AuthLayout />,
       errorElement: <NotFound />,
       children: [
-        { index: true, element: <Login /> },
-        { path: "login", element: <Login /> },
+        { index: true, element: <Login saveLoginData={saveLoginData} /> },
+        { path: "login", element: <Login saveLoginData={saveLoginData} /> },
         { path: "register", element: <Register /> },
         { path: "forget-pass", element: <ForgetPass /> },
         { path: "reset-pass", element: <ResetPass /> },
@@ -31,21 +39,23 @@ function App() {
     },
     {
       path: "dashboard",
-      element: <MasterLayout />,
+      element: (
+        <ProtectedRoute loginData={loginData}>
+          <MasterLayout />
+        </ProtectedRoute>
+      ),
       errorElement: <NotFound />,
       children: [
         { index: true, element: <Dashboard /> },
         { path: "projects", element: <ProjectsList /> },
-        { path: "tasks", element: <TaskesList /> },
+        { path: "tasks", element: <TasksList /> },
+        { path: "tasksData", element: <TasksData /> },
         { path: "users", element: <UsersList /> },
       ],
     },
   ]);
-  return (
-    <>
-      <RouterProvider router={routers} />
-    </>
-  );
+
+  return <RouterProvider router={routers} />;
 }
 
 export default App;

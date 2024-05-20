@@ -5,9 +5,9 @@ import SideBar from "../SideBar/SideBar";
 const MasterLayout = () => {
   return (
     <>
-      <NavBar />
+      <NavBar  />
       <div className="d-flex">
-        <div className="w-25">
+        <div className="me-2">
           <SideBar />
         </div>
         <div className="w-75">
