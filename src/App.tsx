@@ -48,6 +48,7 @@ function App() {
         { index: true, element: <Dashboard /> },
         { path: "projects", element: <ProjectsList /> },
         { path: "projects-data", element: <ProjectsData /> },
+        { path: "projects-data/:id", element: <ProjectsData /> },
         { path: "tasks", element: <TaskesList /> },
         { path: "users", element: <UsersList /> },
       ],

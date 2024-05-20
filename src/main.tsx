@@ -7,12 +7,15 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./index.css";
 import AuthContextProvider from "./modules/SharedModule/components/AuthContext/AuthContext.tsx";
 import ApiContextProvider from "./modules/SharedModule/components/ApiContext/ApiContext.tsx";
+import ModeContextProvider from "./modules/SharedModule/components/ModeContext/ModeContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AuthContextProvider>
       <ApiContextProvider>
-        <App />
+        <ModeContextProvider>
+          <App />
+        </ModeContextProvider>
       </ApiContextProvider>
     </AuthContextProvider>
   </React.StrictMode>

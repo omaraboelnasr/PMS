@@ -21,6 +21,7 @@ background-position: center;
     --main-color:rgba(239, 155, 40, 1);
     --main-bg-color: rgba(49, 89, 81, 0.9);
     --second-bg-color :  rgba(211, 211, 211, 0.192);
+    --table-bg-color :  rgba(49, 89, 81, 0.9);
 }
 
 .input-group input{
@@ -56,10 +57,13 @@ background-position: center;
 text-decoration: none;
 }
 
-.projectsData{
+.projectsData , .projectsList{
 background-color: var(--second-bg-color);
 }
 
-.projects-crud{
-    background-color: aqua;
+Table th {
+    background-color: var(--table-bg-color) !important;
+    border: 1px solid var(--table-bg-color) !important;
+    color: white !important;
+    font-weight: normal !important;
 }
